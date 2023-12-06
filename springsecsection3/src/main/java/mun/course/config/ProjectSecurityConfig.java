@@ -19,17 +19,31 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class ProjectSecurityConfig {
 
+    public static final String[] AUTH_WHITELIST = {
+            "/v3/api-docs/**",
+            "/myAccount",
+            "/myCards",
+            "/myBalance",
+            "/myLoans",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/actuator/**",
+            "/swagger-ui/**",
+            "/webjars/**"
+    };
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable(); //временно
+
         http.authorizeHttpRequests((requests) ->
                 requests.requestMatchers(
-                        "/myAccount",
-                        "/myCards",
-                        "/myBalance",
-                        "/myLoans")
+                        AUTH_WHITELIST)
                         .authenticated());
 
-        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/notices", "/contact").permitAll());
+        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/notices", "/contact", "/register").permitAll());
 
         http.formLogin(withDefaults());
         http.httpBasic(withDefaults());
