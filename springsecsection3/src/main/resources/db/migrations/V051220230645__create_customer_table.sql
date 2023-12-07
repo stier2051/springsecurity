@@ -1,5 +1,7 @@
-create table if not exists customer (
+CREATE TABLE IF NOT EXISTS customer(
     id BIGINT PRIMARY KEY ,
     email TEXT NOT NULL ,
     pwd TEXT NOT NULL,
     role TEXT NOT NULL);
+
+CREATE SEQUENCE customer_seq START 1;
