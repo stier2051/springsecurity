@@ -26,6 +26,7 @@ public class ProjectSecurityConfig {
             "/myCards",
             "/myBalance",
             "/myLoans",
+            "/user",
             "/swagger-resources",
             "/swagger-resources/**",
             "/configuration/ui",
