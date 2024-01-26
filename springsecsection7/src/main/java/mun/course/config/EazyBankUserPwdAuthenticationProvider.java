@@ -1,5 +1,7 @@
 package mun.course.config;
 
+import lombok.extern.slf4j.Slf4j;
+import mun.course.model.Authority;
 import mun.course.model.Customer;
 import mun.course.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 @Component
+@Slf4j
 public class EazyBankUserPwdAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
@@ -29,15 +34,22 @@ public class EazyBankUserPwdAuthenticationProvider implements AuthenticationProv
         List<Customer> customer = customerRepository.findByEmail(username);
         if (!customer.isEmpty()) {
             if (passwordEncoder.matches(pwd, customer.get(0).getPwd())) {
-                List<GrantedAuthority> authorities = new ArrayList<>();
-                authorities.add(new SimpleGrantedAuthority(customer.get(0).getRole()));
-                return new UsernamePasswordAuthenticationToken(username, pwd, authorities);
+                log.info("login user's authorities {}", customer.get(0).getAuthorities());
+                return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(customer.get(0).getAuthorities()));
             } else {
                 throw new BadCredentialsException("Invalid Password");
             }
         } else {
             throw new BadCredentialsException("No user registered with this details");
         }
+    }
+
+    private List<GrantedAuthority> getGrantedAuthorities(Set<Authority> authorities) {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        for (Authority authority : authorities) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName()));
+        }
+        return grantedAuthorities;
     }
 
     @Override
