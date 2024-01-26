@@ -21,10 +21,6 @@ public class ProjectSecurityConfig {
 
     public static final String[] AUTH_WHITELIST = {
             "/v3/api-docs/**",
-            "/myAccount",
-            "/myCards",
-            "/myBalance",
-            "/myLoans",
             "/user",
             "/swagger-resources",
             "/swagger-resources/**",
@@ -62,6 +58,10 @@ public class ProjectSecurityConfig {
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
 
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
+                        .requestMatchers("/myBalance").hasAnyAuthority("VIEWACCOUNT", "VIEWBALANCE")
+                        .requestMatchers("/myLoans").hasAuthority("VIEWLOANS")
+                        .requestMatchers("/myCards").hasAuthority("VIEWCARDS")
                         .requestMatchers(AUTH_WHITELIST).authenticated()
                         .requestMatchers("/notices", "/contact", "/register").permitAll())
 
