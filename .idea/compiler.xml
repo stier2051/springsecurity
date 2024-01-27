@@ -14,6 +14,7 @@
         <module name="springsecsection5" />
         <module name="springsecsection6" />
         <module name="springsecsection7" />
+        <module name="springsecsection8" />
       </profile>
     </annotationProcessing>
   </component>
@@ -25,6 +26,7 @@
       <module name="springsecsection5" options="-parameters" />
       <module name="springsecsection6" options="-parameters" />
       <module name="springsecsection7" options="-parameters" />
+      <module name="springsecsection8" options="-parameters" />
       <module name="springsecuritybasic" options="-parameters" />
     </option>
   </component>
