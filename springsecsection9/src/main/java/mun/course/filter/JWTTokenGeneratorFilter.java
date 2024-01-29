@@ -1,6 +1,5 @@
 package mun.course.filter;
 
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
@@ -36,6 +35,7 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
                     .signWith(key).compact();
             response.setHeader(SecurityConstants.JWT_HEADER, jwt);
         }
+        filterChain.doFilter(request, response);
     }
 
     @Override
