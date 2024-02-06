@@ -12,3 +12,12 @@ services:
       POSTGRES_MULTIPLE_DATABASES: "eazybank"
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.6
+    command: start-dev
+    ports:
+      - "8089:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
