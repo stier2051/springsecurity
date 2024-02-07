@@ -16,6 +16,7 @@
         <module name="springsecsection7" />
         <module name="springsecsection8" />
         <module name="springsecsection9" />
+        <module name="springsecsection13" />
         <module name="springsecsection10" />
         <module name="springsecOAUTH2GitHub" />
       </profile>
@@ -25,6 +26,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="springsecOAUTH2GitHub" options="-parameters" />
       <module name="springsecsection10" options="-parameters" />
+      <module name="springsecsection13" options="-parameters" />
       <module name="springsecsection2" options="-parameters" />
       <module name="springsecsection3" options="-parameters" />
       <module name="springsecsection4" options="-parameters" />
