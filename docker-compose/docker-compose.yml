@@ -28,7 +28,7 @@ services:
     image: elasticsearch:8.12.1
     container_name: elasticsearch
     environment:
-      ES_JAVA_OPTS: Xms256M -Xmx256M
+      ES_JAVA_OPTS: -Xms256m -Xmx256m
       discovery.type: single-node
 #      It basically runs it with SSL disabled, allowing you to create HTTP connections with it
       xpack.security.enabled: false
@@ -41,7 +41,7 @@ services:
     image: logstash:8.12.1
     container_name: logstash
     environment:
-      ES_JAVA_OPTS: Xmx256m -Xms256m
+      ES_JAVA_OPTS: -Xmx256m -Xms256m
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
