@@ -2,6 +2,7 @@ package mun.course.controller;
 
 import mun.course.model.Accounts;
 import mun.course.repository.AccountsRepository;
+import mun.course.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,15 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController {
 
     @Autowired
-    private AccountsRepository accountsRepository;
+    private AccountService accountService;
 
     @GetMapping("/myAccount")
     public Accounts getAccountDetails(@RequestParam Long id) {
-        Accounts accounts = accountsRepository.findByCustomerId(id);
-        if (accounts != null) {
-            return accounts;
-        } else {
-            return null;
-        }
+        return accountService.findByCustomerId(id);
     }
 }
