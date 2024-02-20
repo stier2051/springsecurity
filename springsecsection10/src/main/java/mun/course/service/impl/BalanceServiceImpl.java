@@ -15,8 +15,9 @@ public class BalanceServiceImpl implements BalanceService {
     @Autowired
     private AccountTransactionsRepository accountTransactionsRepository;
     @Override
-    public List<AccountTransactions> findByCustomerId(Long customerId) {
-        List<AccountTransactions> accountTransactions = accountTransactionsRepository.findByCustomerIdOrderByTransactionDtDesc(customerId);
+    public List<AccountTransactions> findByCustomerId(Long id) {
+        List<AccountTransactions> accountTransactions =
+                accountTransactionsRepository.findByCustomerIdOrderByTransactionDtDesc(id);
         if (accountTransactions != null) {
             log.info("endpoint myBalance");
             return accountTransactions;
