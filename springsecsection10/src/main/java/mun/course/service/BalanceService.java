@@ -5,5 +5,5 @@ import mun.course.model.AccountTransactions;
 import java.util.List;
 
 public interface BalanceService {
-    List<AccountTransactions> findByCustomerId(Long customerId);
+    List<AccountTransactions> findByCustomerId(Long id);
 }
