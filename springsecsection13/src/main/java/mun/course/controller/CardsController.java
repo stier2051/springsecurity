@@ -1,9 +1,7 @@
 package mun.course.controller;
 
 import mun.course.model.Cards;
-import mun.course.model.Customer;
-import mun.course.repository.CardsRepository;
-import mun.course.repository.CustomerRepository;
+import mun.course.service.CardsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,20 +13,10 @@ import java.util.List;
 public class CardsController {
 
     @Autowired
-    private CardsRepository cardsRepository;
-
-    @Autowired
-    private CustomerRepository customerRepository;
+    private CardsService cardsService;
 
     @GetMapping("/myCards")
     public List<Cards> getCardDetails(@RequestParam String email) {
-        List<Customer> customers = customerRepository.findByEmail(email);
-        if (customers != null && !customers.isEmpty()) {
-            List<Cards> cards = cardsRepository.findByCustomerId(customers.get(0).getId());
-            if (cards != null) {
-                return cards;
-            }
-        }
-        return null;
+        return cardsService.getCardsDetails(email);
     }
 }
