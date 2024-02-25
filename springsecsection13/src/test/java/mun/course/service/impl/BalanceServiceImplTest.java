@@ -49,6 +49,8 @@ class BalanceServiceImplTest {
         when(accountTransactionsRepository.findByCustomerIdOrderByTransactionDtDesc(Mockito.anyLong()))
                 .thenReturn(transactions);
 
-        assertEquals(3, transactions.size());
+        var result = balanceService.getAllTransactions(Mockito.anyString());
+
+        assertEquals(3, result.size());
     }
 }
