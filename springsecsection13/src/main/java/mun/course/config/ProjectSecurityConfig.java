@@ -60,10 +60,10 @@ public class ProjectSecurityConfig {
 
 
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
-                        .requestMatchers("/myBalance").hasAnyAuthority("VIEWACCOUNT", "VIEWBALANCE")
+                        .requestMatchers("/myAccount").hasRole("USER")
+                        .requestMatchers("/myBalance").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/myLoans").authenticated()
-                        .requestMatchers("/myCards").hasAuthority("VIEWCARDS")
+                        .requestMatchers("/myCards").hasRole("USER")
                         .requestMatchers(AUTH_WHITELIST).authenticated()
                         .requestMatchers("/notices", "/contact", "/register").permitAll())
 

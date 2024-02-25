@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
-        Map<String, Object> realmAccess = (Map<String, Object>) jwt.getClaims().get("realm access");
+        Map<String, Object> realmAccess = (Map<String, Object>) jwt.getClaims().get("realm_access");
 
         if (realmAccess == null || realmAccess.isEmpty()) {
             return new ArrayList<>();
